@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Trams</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+    body {
+      background-image: url('background.png'); /* replace with your photo */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    #tram-times {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="tram-times">Loading tram times...</div>
+
+  <script>
+    function formatTime(date) {
+      return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    }
+
+    function getFakeTramTimes() {
+      const now = new Date();
+      const times = [
+        new Date(now.getTime() + 5 * 60000),
+        new Date(now.getTime() + 10 * 60000),
+        new Date(now.getTime() + 20 * 60000)
+      ];
+      document.getElementById('tram-times').innerHTML = '<strong>Next 3 trams:</strong><br>' + times.map(formatTime).join('<br>');
+    }
+
+    getFakeTramTimes();
+    setInterval(getFakeTramTimes, 60000); // refresh every 60 seconds
+  </script>
+</body>
+</html>
